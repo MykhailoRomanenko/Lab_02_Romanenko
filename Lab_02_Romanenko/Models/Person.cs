@@ -13,11 +13,10 @@ namespace Lab_02_Romanenko.Models
             "Scorpio", "Sagittarius"
         };
 
-        private readonly DateTime _birthDate;
-        private string _eMail;
-
-        private string _firstName;
-        private string _lastName;
+        public readonly DateTime _birthDate;
+        public string _eMail;
+        public string _firstName;
+        public string _lastName;
 
         public Person(string firstName, string lastName, string eMail, DateTime birthDate)
         {
@@ -41,15 +40,15 @@ namespace Lab_02_Romanenko.Models
             _birthDate = birthDate;
         }
 
-        private string ChineseSign => CalculateChinese();
+        public string ChineseSign => CalculateChinese();
 
-        private string WesternSign => CalculateWestern();
+        public string WesternSign => CalculateWestern();
 
-        private int Age => CalculateAge();
+        public int Age => CalculateAge();
 
-        private bool IsBirthday => Birthday();
+        public bool IsBirthday => Birthday();
 
-        private bool IsAdult => Adult();
+        public bool IsAdult => Adult();
 
         private int CalculateAge()
         {

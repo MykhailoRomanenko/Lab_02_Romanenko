@@ -5,8 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_02_Romanenko"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="400">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextAlignment" Value="Left"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Grid.Column></Grid.Column>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontSize="24" TextAlignment="Center" FontWeight="Bold" >Enter user information: </TextBlock>
+        
+        <TextBlock Grid.Column="1" Grid.Row="2" >First name: </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding FirstNameValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+        
+        <TextBlock Grid.Column="1" Grid.Row="3" >Last name: </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="3" Text="{Binding LastNameValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+        
+        <TextBlock Grid.Column="1" Grid.Row="4" >E-mail: </TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="4" Text="{Binding EMailValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+        
+        <TextBlock Grid.Column="1" Grid.Row="5" >Birth date: </TextBlock>
+        <DatePicker Grid.Row="5" Grid.Column="2" Width="200" Height="24" SelectedDate="{Binding DateValue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+        
+        <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Height="40" FontSize="18" Margin="10" FontWeight="SemiBold" Command="{Binding ProceedCommand}">Proceed.</Button>
     </Grid>
 </Window>
