@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
+using Lab_02_Romanenko.Tools.Exceptions;
 
 namespace Lab_02_Romanenko.Models
 {
@@ -12,6 +15,10 @@ namespace Lab_02_Romanenko.Models
             "Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra",
             "Scorpio", "Sagittarius"
         };
+        
+        private static readonly Regex EMail = new Regex("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$:");
+        private static readonly int MAX_AGE = 135;
+
 
         public readonly DateTime _birthDate;
         public string _eMail;
@@ -24,6 +31,7 @@ namespace Lab_02_Romanenko.Models
             _lastName = lastName;
             _eMail = eMail;
             _birthDate = birthDate;
+            ThrowExceptionsIfNecessary();
         }
 
         public Person(string firstName, string lastName, string eMail)
@@ -31,6 +39,7 @@ namespace Lab_02_Romanenko.Models
             _firstName = firstName;
             _lastName = lastName;
             _eMail = eMail;
+            ThrowExceptionsIfNecessary();
         }
 
         public Person(string firstName, string lastName, DateTime birthDate)
@@ -38,6 +47,7 @@ namespace Lab_02_Romanenko.Models
             _firstName = firstName;
             _lastName = lastName;
             _birthDate = birthDate;
+            ThrowExceptionsIfNecessary();
         }
 
         public string ChineseSign => CalculateChinese();
@@ -63,6 +73,47 @@ namespace Lab_02_Romanenko.Models
             return age;
         }
 
+        private bool IsEMailValid()
+        {
+            try
+            {
+                MailAddress m = new MailAddress(_eMail);
+                return true;
+            }
+            catch (FormatException e)
+            {
+                return false;
+            }
+        }
+        
+        private bool IsUserNotDead()
+        {
+            return  _birthDate.Year > DateTime.Today.Year - MAX_AGE;;
+        }
+
+        private bool IsUserBorn()
+        {
+            return  _birthDate.CompareTo(DateTime.Today) < 0;
+        }
+        
+        private void ThrowExceptionsIfNecessary()
+        {
+            if (!IsUserBorn())
+            {
+                throw new TimeContinuumException("Birth date in future: " + _birthDate.Date);
+            }
+
+            if (!IsUserNotDead())
+            {
+                throw new UserIsProbablyDeadException("Birth date is 135 or more years away: " + _birthDate.Date.Year);
+            }
+
+            if (!IsEMailValid())
+            {
+                throw new InvalidEMailException("E-Mail does not match e-mail standards: "+ _eMail);
+            }
+            Console.Write("Checks are correct in ThrowExceptionsIfNecessary()");
+        }
         private string CalculateChinese()
         {
             return Chinese[_birthDate.Year % 12];

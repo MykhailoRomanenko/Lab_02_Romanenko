@@ -19,11 +19,20 @@
             <e p="netcoreapp3.1" t="Include">
               <e p="App.g.cs" t="Include" />
               <e p="Lab_02_Romanenko.AssemblyInfo.cs" t="Include" />
-              <e p="MainWindow.g.cs" t="Include" />
+              <e p="Views" t="Include">
+                <e p="MainWindow.g.cs" t="Include" />
+              </e>
             </e>
           </e>
         </e>
         <e p="Tools" t="Include">
+          <e p="Exceptions" t="Include">
+            <e p="InvalidEMailException.cs" t="Include" />
+            <e p="TimeContinuumException.cs" t="Include" />
+            <e p="UserIsProbablyDeadException.cs" t="Include" />
+          </e>
+          <e p="ILoaderOwner.cs" t="Include" />
+          <e p="LoaderManager.cs" t="Include" />
           <e p="ProceedCommand.cs" t="Include" />
         </e>
         <e p="ViewModels" t="Include">
